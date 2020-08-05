@@ -10,3 +10,8 @@ base="/"
   to = "/.netlify/functions/:splat"
   status = 200
   force = true
+[[redirects]]
+  from = "favicon.ico"
+  to = "/icons/favicon.ico"
+  status = 200
+  force = true
