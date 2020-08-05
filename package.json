@@ -1,0 +1,34 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Piotr Trybisz - portfolio",
+  "main": "index.html",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "md5": "^2.2.1",
+    "mongodb": "^3.5.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "netlify dev",
+    "build": "netlify build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PetrusTryb/portfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "piotr",
+    "trybisz",
+    "personal",
+    "webpage",
+    "cms"
+  ],
+  "author": "Piotr Trybisz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PetrusTryb/portfolio/issues"
+  },
+  "homepage": "https://github.com/PetrusTryb/portfolio#readme"
+}
