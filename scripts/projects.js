@@ -229,7 +229,7 @@ function commentProject(id,nk=false){
           <div class="media-content">
             <div class="content">
               <p>
-                <strong>${comment.username}</strong>${comment.rank=="admin"?" <span class='tag is-warning'>Admin</span>":""}  ${comment.uid==userData._id?"<a class='has-text-danger'><i class='fas fa-trash'></i></a>":"<a class='has-text-danger'><i class='fas fa-flag'></i></a>"}
+                <strong>${comment.username}</strong>${comment.rank=="admin"?" <span class='tag is-warning'>Admin</span>":""}  ${comment.uid==userData._id?"<a class='has-text-danger delBtn' cId='"+comment._id+"'><i class='fas fa-trash'></i></a>":""}
                 <br/>
                 ${comment.content}
                 <br/>
@@ -255,6 +255,10 @@ function commentProject(id,nk=false){
         let neutralButtons=document.getElementsByClassName("neutral")
         for(let eBtn of neutralButtons){
             eBtn.onclick=()=>{sendReaction(eBtn.getAttribute("cId"),"neutral")}
+        }
+        let deleteButtons=document.getElementsByClassName("delBtn")
+        for(let eBtn of deleteButtons){
+            eBtn.onclick=()=>{sendReaction(eBtn.getAttribute("cId"),"delete")}
         }
         }
     )}

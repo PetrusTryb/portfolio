@@ -40,8 +40,8 @@
                   <string type="gui">Projects</string>
                 </a>
 
-                <a class="navbar-item">
-                  <string type="gui" href="contact.html">Contact</string>
+                <a class="navbar-item" href="contact.html">
+                  <string type="gui">Contact</string>
                 </a>
               </div>
           
@@ -88,10 +88,10 @@
               </div>
               <div class="dropdown-menu" id="dropdown-menu-edit" role="menu">
                 <div class="dropdown-content">
-                  <a class="dropdown-item">
+                  <a class="dropdown-item editButton" edit="Website name" group="config">
                     <i class="fas fa-signature" aria-hidden="true"></i> <string type="gui">Edit name</string>
                   </a>
-                  <a class="dropdown-item">
+                  <a class="dropdown-item editButton" edit="Motto" group="config">
                     <i class="fas fa-quote-right" aria-hidden="true"></i> <string type="gui">Edit quote</string>
                   </a>
                 </div>
@@ -103,36 +103,31 @@
   <section class="section">
     <div class="container">
       <h1 class="title">
-        <string type="gui">Log in</string>
+        <string type="contact">Contact title</string>
       </h1>
-      <article class="message is-danger" id="msg">
-        <div class="message-body" id="msgb"></div>
-      </article>
-      <form action="/api/login" method="POST">
-      <div class="field">
-        <p class="control has-icons-left has-icons-right">
-          <input class="input" type="email" placeholder="Email" name="email" required>
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
-        </p>
-      </div>
-      <div class="field">
-        <p class="control has-icons-left">
-          <input class="input" type="password" placeholder="Pass" name="pass" required>
-          <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
-          </span>
-        </p>
-      </div>
-      <div class="field">
-        <p class="control">
-          <button class="button is-success">
-            Ok
+      <p class="subtitle">
+        <string type="contact">Contact text</string>
+      </p>
+      <div class="dropdown is-hoverable is-hidden admin-controls">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+            <span><i class="fas fa-edit" aria-hidden="true"></i> <string type="gui">Edit</string></span>
+            <span class="icon is-small">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
           </button>
-        </p>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu-edit" role="menu">
+          <div class="dropdown-content">
+            <a class="dropdown-item editButton" edit="Contact title" group="contact">
+              <i class="fas fa-heading" aria-hidden="true"></i> <string type="gui">Edit title</string>
+            </a>
+            <a class="dropdown-item editButton" edit="Contact text" group="contact">
+              <i class="fas fa-keyboard" aria-hidden="true"></i> <string type="gui">Edit text</string>
+            </a>
+          </div>
+        </div>
       </div>
-      </form>
     </div>
   </section>
   <footer class="footer">
@@ -150,32 +145,7 @@
         <button class="delete" aria-label="close" id="editModalClose"></button>
       </header>
       <section class="modal-card-body">
-        <div class="columns">
-        <aside class="menu column is-one-quarter">
-          <p class="menu-label">
-            <i class="fas fa-globe"></i> <string type="gui">Languages</string>
-          </p>
-          <ul class="menu-list" id="langList">
-
-          </ul>
-          <p class="menu-label">
-            <i class="fas fa-plus"></i> <string type="gui">Add new language</string>
-          </p>
-          <ul class="menu-list">
-            <li>
-              <div class="select">
-                <select id="newLocaleSelect">
-                  <option selected disabled></option>
-                  <option value="default">Default</option>
-                </select>
-              </div>
-            </li>
-          </ul>
-        </aside>
-        <main class="column">
-          <div id="editor"></div>
-        </main>
-      </div>
+        <div id="editModalMLI"></div>
       </section>
       <footer class="modal-card-foot">
         <button class="button is-success" id="editModalSave"><string type="gui">Save</string></button>
@@ -183,13 +153,13 @@
       </footer>
     </div>
   </div>
-  <script src="scripts/message.js"></script>
   <script src="scripts/bulma-toast.js" defer></script>
   <script src="scripts/strings.js" defer></script>
   <script src="scripts/navbar.js" defer></script>
   <script src="scripts/langList.js" defer></script>
+  <script src="scripts/multilang-input.js" defer></script>
   <script src="scripts/user.js" defer></script>
   <link href="styles/quill/quill.snow.css" rel="stylesheet">
-  <script src="scripts/quill.js"></script>     
-  </body>
+  <script src="scripts/quill.js"></script>  
+</body>
 </html>

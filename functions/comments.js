@@ -101,6 +101,24 @@ exports.handler = function(event, context, callback) {
                     conn.close()
                 })
             }
+            else if(body["reaction"]=="delete"){
+                db.collection("comments").deleteOne({"_id":ObjectId(body["cid"]),"uid":result._id},function(e,r){
+                    if(e){
+                        console.error(e)
+                        callback(null, {
+                            statusCode: 500,
+                            body: "Database error"
+                          });
+                    }
+                    else{ 
+                        callback(null, {
+                            statusCode: 200,
+                            body: "OK"
+                          });
+                    }
+                    conn.close()
+                })
+            }
             else if(result["rank"]=="admin"||result["rank"]=="user"){
                 let commentData={
                     "for":body["for"],

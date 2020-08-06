@@ -42,7 +42,8 @@ exports.handler = function(event, context, callback) {
                 <script>
                 localStorage.setItem("sid",'${sid}');
                 location.href="/index.html";
-                </script>`
+                </script>`,
+                headers: { 'Content-Type': 'text/html' }
                 });
                 }
                 conn.close();
