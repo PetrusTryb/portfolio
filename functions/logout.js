@@ -13,7 +13,7 @@ exports.handler = function(event, context, callback) {
         else{
             callback(null,{
                 statusCode:200,
-                body:"Goodbye!"
+                body:"END"
             });
         }
         conn.close();

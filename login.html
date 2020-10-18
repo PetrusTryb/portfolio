@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' 'unsafe-inline';
-    style-src-elem 'self' 'unsafe-inline'; script-src-elem 'self'; img-src 'self'; connect-src 'self'">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PortCMS</title>
     <link rel="stylesheet" href="styles/bulma/bulma.min.css"/>
+    <link rel="stylesheet" href="styles/bulma/bulma-prefers-dark.css"/>
     <link rel="stylesheet" href="styles/bulma/bulma-pageloader.min.css">
-    <script defer src="scripts/fontawesome.js"></script>
+    <script defer src="scripts/libs/fontawesome.js"></script>
   </head>
   <body>
-    <div class="pageloader is-active"></div>
-    <section class="hero is-medium is-primary is-bold">
+    <div class="pageloader is-dark is-active"></div>
+    <section class="hero is-medium is-bold is-danger">
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-              <a class="navbar-item" href="index.html">
-                <b><string type="config">Website name</string></b>
+              <a class="navbar-item" href="/#index">
+                <b id="mainMenuTitle"></b>
               </a>
           
               <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -28,23 +27,15 @@
           
             <div id="navbarBasicExample" class="navbar-menu">
               <div class="navbar-start">
-                <a class="navbar-item" href="index.html">
-                  <string type="gui">Home page</string>
-                </a>
-          
-                <a class="navbar-item" href="about.html">
-                  <string type="gui">About me</string>
-                </a>
-
-                <a class="navbar-item" href="projects.html">
-                  <string type="gui">Projects</string>
-                </a>
-
-                <a class="navbar-item">
-                  <string type="gui" href="contact.html">Contact</string>
-                </a>
-              </div>
-          
+                <div id="mainMenu"></div>
+                <div class="navbar-item admin-controls is-hidden">
+                  <div class="buttons">
+                    <a class="button is-info" id="menuManageButton">
+                      Manage
+                    </a>
+                  </div>
+                </div>  
+              </div>      
               <div class="navbar-end guest">
                 <div class="navbar-item">
                   <div class="buttons">
@@ -71,11 +62,11 @@
           </nav>
         <div class="hero-body">
           <div class="container">
-            <h1 class="title">
-              <string type="config">Website name</string>
+            <h1 class="title" id="heroTitle">
+              Website title
             </h1>
-            <h2 class="subtitle">
-              <string type="config">Motto</string>
+            <h2 class="subtitle" id="heroSubtitle">
+              Website subtitle
             </h2>
             <div class="dropdown is-hoverable is-hidden admin-controls">
               <div class="dropdown-trigger">
@@ -88,11 +79,11 @@
               </div>
               <div class="dropdown-menu" id="dropdown-menu-edit" role="menu">
                 <div class="dropdown-content">
-                  <a class="dropdown-item">
-                    <i class="fas fa-signature" aria-hidden="true"></i> <string type="gui">Edit name</string>
+                  <a class="dropdown-item editButton" id="editWebsiteTitle">
+                    <i class="fas fa-signature" aria-hidden="true"></i>Edit title
                   </a>
-                  <a class="dropdown-item">
-                    <i class="fas fa-quote-right" aria-hidden="true"></i> <string type="gui">Edit quote</string>
+                  <a class="dropdown-item editButton" id="editWebsiteSubtitle">
+                    <i class="fas fa-quote-right" aria-hidden="true"></i>Edit subtitle
                   </a>
                 </div>
               </div>
@@ -100,96 +91,56 @@
           </div>
         </div>
       </section>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">
-        <string type="gui">Log in</string>
-      </h1>
-      <article class="message is-danger" id="msg">
-        <div class="message-body" id="msgb"></div>
-      </article>
-      <form action="/api/login" method="POST">
-      <div class="field">
-        <p class="control has-icons-left has-icons-right">
-          <input class="input" type="email" placeholder="Email" name="email" required>
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
-        </p>
-      </div>
-      <div class="field">
-        <p class="control has-icons-left">
-          <input class="input" type="password" placeholder="Pass" name="pass" required>
-          <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
-          </span>
-        </p>
-      </div>
-      <div class="field">
-        <p class="control">
-          <button class="button is-success">
-            Ok
-          </button>
-        </p>
-      </div>
-      </form>
-    </div>
-  </section>
-  <footer class="footer">
-    <div class="content has-text-centered">
-      <p>
-        PortCMS by Piotr Trybisz - <i class="fas fa-bolt"></i> fast and <i class="fab fa-accessible-icon"></i> accessible CMS for personal pages
-      </p>
-    </div>
-  </footer>
-  <div class="modal" id="editModal">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title" id="editModalTitle"></p>
-        <button class="delete" aria-label="close" id="editModalClose"></button>
-      </header>
-      <section class="modal-card-body">
-        <div class="columns">
-        <aside class="menu column is-one-quarter">
-          <p class="menu-label">
-            <i class="fas fa-globe"></i> <string type="gui">Languages</string>
-          </p>
-          <ul class="menu-list" id="langList">
-
-          </ul>
-          <p class="menu-label">
-            <i class="fas fa-plus"></i> <string type="gui">Add new language</string>
-          </p>
-          <ul class="menu-list">
-            <li>
-              <div class="select">
-                <select id="newLocaleSelect">
-                  <option selected disabled></option>
-                  <option value="default">Default</option>
-                </select>
-              </div>
-            </li>
-          </ul>
-        </aside>
-        <main class="column">
-          <div id="editor"></div>
-        </main>
-      </div>
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button is-success" id="editModalSave"><string type="gui">Save</string></button>
-        <button class="button" id="editModalCancel"><string type="gui">Cancel</string></button>
-      </footer>
-    </div>
-  </div>
-  <script src="scripts/message.js"></script>
-  <script src="scripts/bulma-toast.js" defer></script>
+      <main>
+        <section class="section">
+          <div class="container">
+            <h1 class="title">
+              <string type="gui">Log in</string>
+            </h1>
+            <article class="message is-danger" id="msg">
+              <div class="message-body" id="msgb"></div>
+            </article>
+            <form action="/api/login" method="POST">
+            <div class="field">
+              <p class="control has-icons-left has-icons-right">
+                <input class="input" type="email" placeholder="Email" name="email" required>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <p class="control has-icons-left">
+                <input class="input" type="password" placeholder="Pass" name="pass" required>
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <p class="control">
+                <button class="button is-success">
+                  Ok
+                </button>
+              </p>
+            </div>
+            </form>
+          </div>
+        </section>
+      </main>
+      <button class="button is-success is-fullwidth admin-controls is-hidden" id="addBlockBtn">Add block</button>
+  <script src="scripts/libs/bulma-toast.js" defer></script>
   <script src="scripts/strings.js" defer></script>
   <script src="scripts/navbar.js" defer></script>
   <script src="scripts/langList.js" defer></script>
-  <script src="scripts/user.js" defer></script>
+  <script src="scripts/components/multilang-input.js" defer></script>
+  <script src="scripts/components/menu-manager.js" defer></script>
   <link href="styles/quill/quill.snow.css" rel="stylesheet">
-  <script src="scripts/quill.js"></script>     
-  </body>
+  <script src="scripts/libs/quill.js"></script>  
+  <script src="scripts/blocks/section.js"></script>
+  <script src="scripts/main.js" defer></script>
+  <script src="scripts/user.js"></script>
+  <script src="scripts/message.js"></script>
+  <script src="scripts/libs/sweetalert.js" defer></script>
+</body>
 </html>

@@ -38,7 +38,7 @@ exports.handler = function(event, context, callback) {
                 callback(null, {
                 statusCode: 200,
                 body: `
-                <p>OK</p>
+                <p>OK ${sid}</p>
                 <script>
                 localStorage.setItem("sid",'${sid}');
                 location.href="/index.html";
