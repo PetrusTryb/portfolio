@@ -1,0 +1,30 @@
+{
+    "name": "Portfolio",
+    "short_name": "Portfolio",
+    "scope": "/",
+    "display": "standalone",
+    "start_url": "/",
+    "background_color": "transparent",
+    "theme_color": "transparent",
+    "description": "",
+    "orientation": "any",
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/favicon.ico",
+            "sizes": "48x48"
+        },
+        {
+            "src": "icons/android-chrome-192x192.png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "icons/android-chrome-512x512.png",
+            "sizes": "512x512"
+        }
+    ],
+    "url": "https://ptrybisz.tk",
+    "screenshots": [],
+    "lang": ""
+}
