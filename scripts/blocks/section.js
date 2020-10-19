@@ -12,9 +12,9 @@ class Section{
         <div id="adminControls${this.id}"></div>
         </div><div>${content}</div>`
         document.getElementById(container).appendChild(s)
-        this.#initAdminControls()
+        this.initAdminControls()
     }
-    #initAdminControls(){
+    initAdminControls(){
         let i=this.id
         let adminHtml=`<div class="dropdown is-hoverable admin-controls is-hidden">
         <div class="dropdown-trigger">

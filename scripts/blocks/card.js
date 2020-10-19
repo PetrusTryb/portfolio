@@ -55,9 +55,9 @@ class Card{
         </article>
       </div>`
         document.getElementById(container).appendChild(s)
-        this.#initAdminControls()
+        this.initAdminControls()
     }
-    #initAdminControls(){
+    initAdminControls(){
         let i=this.id
         document.getElementById(`edit${i}`).onclick=()=>{
           Card.edit(data.url,this.id,this.data,this.index)

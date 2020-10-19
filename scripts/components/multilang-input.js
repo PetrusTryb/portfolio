@@ -52,15 +52,15 @@ class MultiLangInput{
             e.target.value=""
             this.addLocale(toAdd)
         };
-        this.#quill = new Quill(`#${id}Editor`, {
+        this.quill = new Quill(`#${id}Editor`, {
             theme: 'snow'
         });
-        this.#quill.on('editor-change',(e)=>{
+        this.quill.on('editor-change',(e)=>{
           if (e === 'text-change' && this.activeLocale!==undefined) {
-            this.editorStorage[this.activeLocale]=this.#getEditorHTML()
+            this.editorStorage[this.activeLocale]=this.getEditorHTML()
           }
         })
-        this.#quill.disable()
+        this.quill.disable()
     }
     onEditorChange(){}
     onLocaleRemoved(){}
@@ -77,23 +77,23 @@ class MultiLangInput{
           <a class="${this.id}langEdit" locale="${toAdd}">${locales.find((item)=>{return item.code==toAdd}).name} 
           <span class="delete is-right ${this.id}langRemove" locale="${toAdd}"></span>
           </a></li>`
-      this.#connectEvents()
+      this.connectEvents()
     }
-    #remove(locale,listItem){
+    remove(locale,listItem){
         delete this.editorStorage[locale]
         listItem.remove()
         if(this.activeLocale==locale){
           this.activeLocale=undefined
-          this.#quill.setContents([])
-          this.#quill.disable()
+          this.quill.setContents([])
+          this.quill.disable()
         }
         this.onLocaleRemoved(locale)
     }
-    #connectEvents(){
+    connectEvents(){
         let menuItems=document.getElementsByClassName(`${this.id}langEdit`)
         for (let item of menuItems){
             item.onclick=(e)=>{
-                this.#openEditor(e)
+                this.openEditor(e)
             }
         }
         let menuDeleteItems=document.getElementsByClassName(`${this.id}langRemove`)
@@ -101,30 +101,30 @@ class MultiLangInput{
             item.onclick=(e)=>{
                 e.stopPropagation()
                 let toDelete=e.target.getAttribute("locale")
-                this.#remove(toDelete,e.target.parentElement)
+                this.remove(toDelete,e.target.parentElement)
             }
         }
     }
-    #openEditor(e){
+    openEditor(e){
         this.onEditorChange(this.activeLocale)
-        this.#deactivateOthers()
+        this.deactivateOthers()
         this.activeLocale=undefined
         e.target.classList.add("is-active")
-        this.#quill.setContents([])
-        this.#quill.enable()
+        this.quill.setContents([])
+        this.quill.enable()
         this.activeLocale = e.target.getAttribute("locale")
         if(this.editorStorage.hasOwnProperty(this.activeLocale))
-            this.#quill.pasteHTML(0,this.editorStorage[this.activeLocale])
+            this.quill.pasteHTML(0,this.editorStorage[this.activeLocale])
     }
-    #deactivateOthers(){
+    deactivateOthers(){
         let menuItems=document.getElementsByClassName(`${this.id}langEdit`)
         for (let item of menuItems){
             item.classList.remove("is-active")
         }
     }
-    #getEditorHTML(){
+    getEditorHTML(){
         let tempCont = document.createElement("div");
-        (new Quill(tempCont)).setContents(this.#quill.getContents());
+        (new Quill(tempCont)).setContents(this.quill.getContents());
         return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
     }
 }
